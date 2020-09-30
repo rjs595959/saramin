@@ -12,7 +12,6 @@ const Header = () => {
         margin: 0 auto;
         border-bottom: 1px solid gray;
     `
-
     const TopHeader = styled.div`
         width: 1400px;
         margin: 0 auto;
@@ -36,6 +35,8 @@ const Header = () => {
         line-height: 40px;
         vertical-align: top;
     `
+    
+    // Menu Css
     const MenuWrapper = styled.div`
         height: 500px;
         border: 1px solid black;
@@ -75,13 +76,22 @@ const Header = () => {
             }
         }
     `
-
+    const MenuLeftSide = styled.div`
+    height: 100%;
+    border-right: 1px solid black;
+    & > div {
+        width: 200px;
+        text-align: right;
+        & > h2 {
+            padding : 20px 0;
+        }
+    }
+`;
     const Col4 = styled.ul`
         & > li {
             margin: 5px 15px;
         }
     `
-
     const Col2 = styled.ul`
         & > li {
             width: 100px;
@@ -91,7 +101,6 @@ const Header = () => {
             
         }
     `
-
     const Row1 = styled.ul`
         & > li {
             display: block;
@@ -99,19 +108,6 @@ const Header = () => {
             padding-left: 25px;
         }
     `
-
-    const MenuLeftSide = styled.div`
-        height: 100%;
-        border-right: 1px solid black;
-        & > div {
-            width: 200px;
-            text-align: right;
-            & > h2 {
-                padding : 20px 0;
-            }
-        }
-    `;
-
     const ServiceHome = styled.div`
         width : 100px;
         height: 30px;
@@ -129,8 +125,9 @@ const Header = () => {
     `
 
     
+    
     // 상태 관리 영역
-    const [toggleMenu, setToggleMenu] = useState(true)
+    const [toggleMenu, setToggleMenu] = useState(false)
 
     // 함수 관리 영역
     const MenuOnClick = () => {
@@ -348,6 +345,9 @@ const Header = () => {
                     </div>
                 </Menu>
             </MenuWrapper>
+            <BottomHeader>
+
+            </BottomHeader>
         </HeaderWrapper>
     )
 }
