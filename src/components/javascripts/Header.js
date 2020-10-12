@@ -1,15 +1,33 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import '../css/Header.css'
 import { HiMenuAlt1 } from 'react-icons/hi'
 import { BsChevronDown } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
+import Slide from './Slide';
 
 const Header = () => {
-    // Css Components
+    const [key, setKey] = useState(3);
+    const [slides, setSlides] = useState([
+    {
+        key : 1,
+        titleTag:'추천기업',
+        titles:['(주)티맥스소프트'],
+        mainContent:{title : ['기업정보'], contents : ['업종 : 시스템 소프트웨어 개발 및 공급원', '사원수:557명']},
+        subContent:{title:'진행 중 공고', contents : ['TmaxGroup경력/신입 외 2건']},
+        moveToPage:"기업정보 보러가기"
+    },
+    {
+        key : 2,
+        titleTag:'추천공고',
+        titles:['두레생협연합회','두레생협연합회 하반기 각 부문 채용'],
+        mainContent:{title : '기업정보', contents : ['채소류, 서류 및 향신작물류 도매업, 10년차, 경기 광주시 오포로']},
+        subContent:{title:'진행 중 공고', contents : ['TmaxGroup경력/신입 외 2건']},
+        moveToPage:"기업정보 보러가기"
+    }
+    ])
 
+    // Css Components
     const HeaderWrapper = styled.div`
-        width: 1600px;
-        margin: 0 auto;
         border-bottom: 1px solid gray;
     `
     const TopHeader = styled.div`
@@ -19,6 +37,13 @@ const Header = () => {
         & span {
             padding: 10px;
         }
+    `
+
+    const Logo = styled.div`
+        width: 120px;
+        height: 40px;
+        display: inline-block;
+        overflow: hidden;
     `
     const LeftSide = styled.div`
         display: inline-block;
@@ -35,17 +60,20 @@ const Header = () => {
         line-height: 40px;
         vertical-align: top;
     `
-    
+
     // Menu Css
     const MenuWrapper = styled.div`
+        width: 100%;
         height: 500px;
         border: 1px solid black;
+        z-index: 1000;
+        position: relative;
+        background-color: white;
     `
     const Menu = styled.div`
         width: 1400px;
         height: 100%;
         margin: 0 auto;
-        
         & h4 {
             margin: 10px 10px;
         }
@@ -77,16 +105,16 @@ const Header = () => {
         }
     `
     const MenuLeftSide = styled.div`
-    height: 100%;
-    border-right: 1px solid black;
-    & > div {
-        width: 200px;
-        text-align: right;
-        & > h2 {
-            padding : 20px 0;
+        height: 100%;
+        border-right: 1px solid black;
+        & > div {
+            width: 200px;
+            text-align: right;
+            & > h2 {
+                padding: 20px 0;
+            }
         }
-    }
-`;
+    `
     const Col4 = styled.ul`
         & > li {
             margin: 5px 15px;
@@ -95,21 +123,20 @@ const Header = () => {
     const Col2 = styled.ul`
         & > li {
             width: 100px;
-            margin: 5px 4px; 
+            margin: 5px 4px;
             text-align: center;
             display: inline-block;
-            
         }
     `
     const Row1 = styled.ul`
         & > li {
             display: block;
-            margin-top : 13px;
+            margin-top: 13px;
             padding-left: 25px;
         }
     `
     const ServiceHome = styled.div`
-        width : 100px;
+        width: 100px;
         height: 30px;
         padding: 10px;
         display: inline-block;
@@ -118,36 +145,118 @@ const Header = () => {
             width: 22px;
             height: 20px;
             display: inline-block;
-            content: "";
+            content: '';
 
-            background : url(//www.saraminimage.co.kr/sri/main/ico_outlink_company_home.png) no-repeat;
+            background: url(//www.saraminimage.co.kr/sri/main/ico_outlink_company_home.png)
+                no-repeat;
         }
     `
 
-    
-    
-    // 상태 관리 영역
+    //BottomHeader Css
+    const BottomHeaderWrap = styled.div`
+        width: 100%;
+        height: 500px;
+        z-index: 999;
+        position: relative;
+        top: 30px;
+        background-color: #d4dff8;
+    `
+    const BottomHeader = styled.div`
+        width: 1400px;
+        position: relative;
+        margin: 0 auto;
+    `
+    const SearchBar = styled.div`
+        width: 1000px;
+        border : 3px solid blue;
+        color: blue;
+        background: white;
+        box-sizing: border-box;
+        position: absolute;
+        top: -25px;
+        left: 200px;
+
+        & > div {
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 8px;
+        }
+
+        & > div:nth-child(2) {
+            border-left: 1px solid lightgray;
+            border-right: 1px solid lightgray;
+        }
+
+        & > div:last-child {
+            width: 20px;
+        }
+    `
+    const Announcement = styled.div`
+        top: 80px;
+        width: 100%;
+        height: 350px;
+        border: 1px solid black;
+        position: absolute;
+        & > div {
+            height: 100%;
+            box-sizing: border-box;
+            border: 1px solid black;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        & > div:last-child {
+            width: 30%;
+        }
+    `
+    const LeftSlide = styled.div`
+        width: 30%;
+        overflow: hidden;
+    `
+    const CenterSlide = styled.div`
+        width: 40%;
+    `
+    const LeftSlideWrap = styled.div`
+        height: 90%;
+        width: 900%;
+    `
+    const LeftSlideMenu =styled.div`
+        width: 390px;
+        height: 10%;
+        text-align: center;
+    `
+   
+   // 상태 관리 영역
     const [toggleMenu, setToggleMenu] = useState(false)
 
     // 함수 관리 영역
     const MenuOnClick = () => {
         setToggleMenu(!toggleMenu)
     }
+
     return (
         <HeaderWrapper>
             <TopHeader>
                 <LeftSide>
-                    <div className="logo">
+                    <Logo>
                         <img src="http://www.saraminimage.co.kr/sri/main/img_main_spr_200710.png" />
-                    </div>
+                    </Logo>
                 </LeftSide>
                 <Center>
-                    <div style={{ display: 'inline-block'}} onClick={MenuOnClick}>
-                        <a href='#'><HiMenuAlt1 /></a>
+                    <div
+                        style={{ display: 'inline-block' }}
+                        onClick={MenuOnClick}
+                    >
+                        <a href="#">
+                            <HiMenuAlt1 />
+                        </a>
                     </div>
 
-                    <span style={{ 'font-weight': 'bold' }}>지역별</span>
-                    <span style={{ 'font-weight': 'bold' }}>직업별</span>
+                    <span style={{ fontWeight: 'bold' }}>지역별</span>
+                    <span style={{ fontWeight: 'bold' }}>직업별</span>
                     <span>헤드헌팅</span>
                     <span>HOT100</span>
                     <span>공채</span>
@@ -174,9 +283,13 @@ const Header = () => {
                     <span>기업 서비스</span>
                 </RightSide>
             </TopHeader>
-            <MenuWrapper style={
-                toggleMenu ? {display: 'block', position:'relative'} : {display: 'none'}
-            }>
+            <MenuWrapper
+                style={
+                    toggleMenu
+                        ? { display: 'block', position: 'absolute' }
+                        : { display: 'none' }
+                }
+            >
                 <Menu>
                     <MenuLeftSide>
                         <div>
@@ -184,7 +297,7 @@ const Header = () => {
                             <h5>채용정보 홈 &#62;</h5>
                         </div>
                     </MenuLeftSide>
-                    <table border='0'>
+                    <table border="0">
                         <tr>
                             <td>
                                 <h4>지역별 &#62;</h4>
@@ -286,7 +399,12 @@ const Header = () => {
                         </tr>
                     </table>
                     <div style={{ height: '100%' }}>
-                        <div style={{ height: '33%', borderBottom: '1px solid gray'}}>
+                        <div
+                            style={{
+                                height: '33%',
+                                borderBottom: '1px solid gray',
+                            }}
+                        >
                             <h4>공채의 명가 &#62;</h4>
                             <Row1>
                                 <li>1000대기업 채용</li>
@@ -296,7 +414,12 @@ const Header = () => {
                                 <li>합격스펙</li>
                             </Row1>
                         </div>
-                        <div style={{ height: '33%', borderBottom: '1px solid gray'}}>
+                        <div
+                            style={{
+                                height: '33%',
+                                borderBottom: '1px solid gray',
+                            }}
+                        >
                             <h4>학력별</h4>
                             <Row1>
                                 <li>고졸채용</li>
@@ -315,7 +438,12 @@ const Header = () => {
                         </div>
                     </div>
                     <div style={{ height: '100%' }}>
-                        <div style={{ height: '33%', borderBottom: '1px solid gray' }}>
+                        <div
+                            style={{
+                                height: '33%',
+                                borderBottom: '1px solid gray',
+                            }}
+                        >
                             <h4>사람인서비스</h4>
                             <Row1>
                                 <li>추천</li>
@@ -324,7 +452,12 @@ const Header = () => {
                                 <li>인적성검사</li>
                             </Row1>
                         </div>
-                        <div style={{ height: '33%', borderBottom: '1px solid gray' }}>
+                        <div
+                            style={{
+                                height: '33%',
+                                borderBottom: '1px solid gray',
+                            }}
+                        >
                             <Row1>
                                 <li>고졸채용</li>
                                 <li>채용관</li>
@@ -344,10 +477,33 @@ const Header = () => {
                         </div>
                     </div>
                 </Menu>
+                <BottomHeader></BottomHeader>
             </MenuWrapper>
-            <BottomHeader>
-
-            </BottomHeader>
+            <BottomHeaderWrap>
+                <BottomHeader>
+                    <SearchBar>
+                        <div>search</div>
+                        <div>findArea</div>
+                        <div>findJob</div>
+                        <div><BsSearch /></div>
+                    </SearchBar>
+                    <Announcement>
+                        <LeftSlide>
+                            <LeftSlideWrap>
+                                {slides.map(slide => {
+                                    return <Slide {...slide}/>
+                                })}
+                           </LeftSlideWrap>
+                            <LeftSlideMenu>
+                                1 2 3 4 5
+                            </LeftSlideMenu>
+                        </LeftSlide>
+                        <CenterSlide>centerSlide</CenterSlide>
+                        <LeftSlide>
+                        </LeftSlide>
+                    </Announcement>
+                </BottomHeader>
+            </BottomHeaderWrap>
         </HeaderWrapper>
     )
 }
