@@ -3,27 +3,44 @@ import styled from 'styled-components'
 import { HiMenuAlt1 } from 'react-icons/hi'
 import { BsChevronDown } from 'react-icons/bs'
 import { BsSearch } from 'react-icons/bs'
-import Slide from './Slide';
+import Slide from './Slide'
 
 const Header = () => {
-    const [key, setKey] = useState(3);
+    const [key, setKey] = useState(3)
     const [slides, setSlides] = useState([
-    {
-        key : 1,
-        titleTag:'추천기업',
-        titles:['(주)티맥스소프트'],
-        mainContent:{title : ['기업정보'], contents : ['업종 : 시스템 소프트웨어 개발 및 공급원', '사원수:557명']},
-        subContent:{title:'진행 중 공고', contents : ['TmaxGroup경력/신입 외 2건']},
-        moveToPage:"기업정보 보러가기"
-    },
-    {
-        key : 2,
-        titleTag:'추천공고',
-        titles:['두레생협연합회','두레생협연합회 하반기 각 부문 채용'],
-        mainContent:{title : '기업정보', contents : ['채소류, 서류 및 향신작물류 도매업, 10년차, 경기 광주시 오포로']},
-        subContent:{title:'진행 중 공고', contents : ['TmaxGroup경력/신입 외 2건']},
-        moveToPage:"기업정보 보러가기"
-    }
+        {
+            key: 1,
+            titleTag: '추천기업',
+            titles: ['(주)티맥스소프트'],
+            mainContent: {
+                title: ['기업정보'],
+                contents: [
+                    '업종 : 시스템 소프트웨어 개발 및 공급원',
+                    '사원수:557명',
+                ],
+            },
+            subContent: {
+                title: '진행 중 공고',
+                contents: ['TmaxGroup경력/신입 외 2건'],
+            },
+            moveToPage: '기업정보 보러가기',
+        },
+        {
+            key: 2,
+            titleTag: '추천공고',
+            titles: ['두레생협연합회', '두레생협연합회 하반기 각 부문 채용'],
+            mainContent: {
+                title: '기업정보',
+                contents: [
+                    '채소류, 서류 및 향신작물류 도매업, 10년차, 경기 광주시 오포로',
+                ],
+            },
+            subContent: {
+                title: '진행 중 공고',
+                contents: ['TmaxGroup경력/신입 외 2건'],
+            },
+            moveToPage: '기업정보 보러가기',
+        },
     ])
 
     // Css Components
@@ -168,7 +185,7 @@ const Header = () => {
     `
     const SearchBar = styled.div`
         width: 1000px;
-        border : 3px solid blue;
+        border: 3px solid blue;
         color: blue;
         background: white;
         box-sizing: border-box;
@@ -223,13 +240,64 @@ const Header = () => {
         height: 90%;
         width: 900%;
     `
-    const LeftSlideMenu =styled.div`
+    const LeftSlideMenu = styled.div`
         width: 390px;
         height: 10%;
         text-align: center;
     `
-   
-   // 상태 관리 영역
+    const CenterTable = styled.table`
+        width: 100%;
+        height: 100%;
+        & > tr {
+            & > td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        }
+    `
+    const Login = styled.div`
+        background-color: #f9fafc;
+        padding: 5px 0px;
+    `
+    const LoginForm = styled.div`
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+       
+    `
+    const PersonalLogin = styled.div`
+        text-align: center;
+        width: 40%;
+        height: 50px;
+        line-height: 50px;
+        padding: 10px 0px;
+        background-color: white;
+        border: 1px solid black;
+    `
+    const CorporateLogin = styled.div`
+        text-align: center;
+        width: 40%;
+        height: 50px;
+        line-height: 50px;
+        padding: 10px 0px;
+        background-color: white;
+        border: 1px solid black;
+    `
+
+    const SubLoginForm = styled.div`
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    `
+    
+    const RecommendAnnouncement = styled.div`
+        text-align: center;
+        padding: 10px 0;
+    `
+    // 상태 관리 영역
     const [toggleMenu, setToggleMenu] = useState(false)
 
     // 함수 관리 영역
@@ -485,22 +553,46 @@ const Header = () => {
                         <div>search</div>
                         <div>findArea</div>
                         <div>findJob</div>
-                        <div><BsSearch /></div>
+                        <div>
+                            <BsSearch />
+                        </div>
                     </SearchBar>
                     <Announcement>
                         <LeftSlide>
                             <LeftSlideWrap>
-                                {slides.map(slide => {
-                                    return <Slide {...slide}/>
+                                {slides.map((slide) => {
+                                    return <Slide {...slide} />
                                 })}
-                           </LeftSlideWrap>
-                            <LeftSlideMenu>
-                                1 2 3 4 5
-                            </LeftSlideMenu>
+                            </LeftSlideWrap>
+                            <LeftSlideMenu>1 2 3 4 5</LeftSlideMenu>
                         </LeftSlide>
-                        <CenterSlide>centerSlide</CenterSlide>
-                        <LeftSlide>
-                        </LeftSlide>
+                        <CenterSlide>
+                            <CenterTable>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                            </CenterTable>
+                        </CenterSlide>
+                        <div>
+                            <Login>
+                                <LoginForm>
+                                    <PersonalLogin>개인회원 로그인</PersonalLogin>
+                                    <CorporateLogin>기업회원 로그인</CorporateLogin>
+                                </LoginForm>
+                                <SubLoginForm>
+                                    <span>아이디/비번찾기</span>
+                                    <span>회원가입</span>
+                                </SubLoginForm>
+                            </Login>
+                            <RecommendAnnouncement>
+                                추천공고
+                            </RecommendAnnouncement>
+                        </div>
                     </Announcement>
                 </BottomHeader>
             </BottomHeaderWrap>
